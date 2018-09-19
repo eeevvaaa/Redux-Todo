@@ -1,10 +1,21 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 
 export default function TodoList(props) {
   return (
     <Fragment>
-      <input type="text" />
-      <ul>{props.todos.map(todo => <li key={todo.id}>{todo.value}</li>)}</ul>
+      <input
+        type="text"
+        value={props.inputText}
+        onChange={props.handleChange}
+      />
+      <button onClick={props.addTodo}>Add Todo</button>
+      <ul>
+        {props.todoList.map((todo, index) => (
+          <li onClick={() => props.toggleTodo(index)} key={index}>
+            {todo.value}
+          </li>
+        ))}
+      </ul>
     </Fragment>
   );
 }

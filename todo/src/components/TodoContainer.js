@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import TodoList from './TodoList';
+import { addTodo, toggleTodo } from '../actions'
 
 class TodoContainer extends React.Component {
   state = {
@@ -9,12 +10,23 @@ class TodoContainer extends React.Component {
 
   handleChange = event => this.setState({ inputText: event.target.value });
 
+  addTodo = event => {
+    event.preventDefault();
+    this.props.addTodo(this.state.inputText);
+  };
+
+  toggleTodo = index => {
+    this.props.toggleTodo(index);
+  };
+
   render() {
     return (
       <TodoList
         handleChange={this.handleChange}
         inputText={this.state.inputText}
+        toggleTodo={this.toggleTodo}
         todoList={this.props.todos}
+        addTodo={this.addTodo}
       />
     );
   }
@@ -24,4 +36,7 @@ const mapStateToProps = state => ({
   todos: state.todos
 });
 
-export default connect(mapStateToProps,{})(TodoContainer);   //currying
+export default connect(
+  mapStateToProps,
+  { addTodo, toggleTodo }
+)(TodoContainer);   //currying

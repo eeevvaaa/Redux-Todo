@@ -5,6 +5,7 @@ import { ADD_TODO } from "../actions";
 
 const initialState = {    //our state is always an object
   todos: [{               //always going to an array and have objects inside it
+    id: 0,
     value: 'Walk the dog.',
     completed: false
   },]
